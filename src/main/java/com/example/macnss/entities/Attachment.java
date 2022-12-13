@@ -13,11 +13,21 @@ public class Attachment {
 
     private String type;
 
-    @Column(name = "medical_file_id")
+    @Column(name = "medical_file_id", insertable = false, updatable = false)
     private Long medicalFileId;
 
+    private double price;
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
     @ManyToOne
-    @JoinColumn(name = "medical_file_id", insertable = false, updatable = false)
+    @JoinColumn(name = "medical_file_id")
     private MedicalFile medicalFile;
 
     public long getId() {

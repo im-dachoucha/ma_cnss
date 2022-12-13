@@ -16,6 +16,17 @@ public class MedicalFile {
     @Column(name = "created_at")
     private Date createdAt;
 
+    @Column(name = "status")
+    private String status;
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     @Column(name = "patient_id")
     private long patientId;
 
@@ -33,6 +44,17 @@ public class MedicalFile {
 
     @OneToMany(mappedBy = "medicalFile")
     private Collection<Attachment> attachments;
+
+    @Transient
+    private double repayment;
+
+    public double getRepayment() {
+        double res = 0;
+        res = this.medications.stream().mapToDouble(Medication::getRepaymentPrice).sum();
+        res += this.attachments.stream().mapToDouble(Attachment::getPrice).sum();
+//        createdAt.
+        return res;
+    }
 
     public long getId() {
         return id;

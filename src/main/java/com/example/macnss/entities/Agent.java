@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "agent")
+@NamedQuery(name = "agent.by.email", query = "select a from Agent a where a.email like :email")
 public class Agent {
 
     @Id
